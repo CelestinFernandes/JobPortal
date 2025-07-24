@@ -1,7 +1,7 @@
 "use client"
 import { useState, useEffect } from "react"
 import Logo from "./Logo"
-import Navigation from "./Navigation"
+import Nav from "./Nav"
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -37,7 +37,7 @@ const Header = () => {
           <Logo />
           {!isMobile && (
             <div style={{ display: "flex", alignItems: "center", gap: "32px" }}>
-              <Navigation theme={theme} isMobile={false} onNavigate={closeMenu} />
+              <Nav theme={theme} isMobile={false} onNavigate={closeMenu} />
               <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
                 <button onClick={toggleTheme} style={{ background: "none", border: `2px solid ${theme === "dark" ? "#FFFFFF" : "#6A38C2"}`, borderRadius: "6px", padding: "8px 12px", cursor: "pointer", fontSize: "16px", color: theme === "dark" ? "#FFFFFF" : "#6A38C2", transition: "all 0.3s ease" }}>
                   {theme === "light" ? "🌙" : "☀️"}
@@ -59,7 +59,7 @@ const Header = () => {
             <div style={{ position: "absolute", top: "100%", left: 0, right: 0, background: theme === "dark" ? "#222222" : "white", boxShadow: "0 4px 20px rgba(0, 0, 0, 0.15)", borderTop: `1px solid ${theme === "dark" ? "#374151" : "#e5e7eb"}`, zIndex: 1000, maxHeight: "80vh", overflowY: "auto" }}>
               <div style={{ padding: "20px", display: "flex", flexDirection: "column", gap: "16px" }}>
                 <div style={{ marginBottom: "16px" }}>
-                  <Navigation theme={theme} isMobile={true} onNavigate={closeMenu} />
+                  <Nav theme={theme} isMobile={true} onNavigate={closeMenu} />
                 </div>
                 <div style={{ height: "1px", background: theme === "dark" ? "#374151" : "#e5e7eb", margin: "8px 0" }} />
                 <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
