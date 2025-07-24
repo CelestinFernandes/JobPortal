@@ -1,7 +1,11 @@
-export default function Logo({ isDark = false }) {
+const Logo = ({ className = "" }) => {
   return (
-    <div className="flex items-center space-x-1">
-      <span className="text-2xl font-bold text-purple-600">Job</span>
-      <span className="text-2xl font-bold text-orange-500">hunt</span>
+    <div className={`logo ${className}`} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+      <span style={{ fontSize: "24px", fontWeight: "bold" }}>
+        <span style={{ color: "#6A38C2" }}>Job</span>
+        <span style={{ color: "#FA4E09" }}>hunt</span>
+      </span>
     </div>
-  )}
+  )
+}
+export default Logo
