@@ -1,100 +1,162 @@
 "use client"
+import { useState, useEffect } from "react"
+import { FaGoogle, FaTwitter, FaLinkedin, FaMicrosoft, FaApple, FaAmazon } from "react-icons/fa"
 
-import { Play } from "lucide-react"
+const HeroSection = () => {
+  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "light")
 
-export default function HeroSection({ isDark }) {
-  const jobCategories = [
-    "Full Stack Developer","Back-end Developer", "Graphic Designer",
-    "Senior Accountant","UI Designer","Employer Branding Associate",
-    "Lead DevOps Engineer","Lead DevOps Engineer","Employer Branding Associate",
-    "Full Stack Developer","Back-end Developer","Graphic Designer",
-    "Senior Accountant","UI Designer"]
+  useEffect(() => {
+    const checkTheme = () => {
+      const current = localStorage.getItem("theme") || "light"
+      if (current !== theme) setTheme(current)}
+      
+    const interval = setInterval(checkTheme, 500)
+    window.addEventListener("storage", checkTheme)
+    return () => {
+      clearInterval(interval)
+      window.removeEventListener("storage", checkTheme)
+    }}, [theme])
+
+  const topRow = ["Artificial Intelligence", "Lead Software Engineer", "Computer Science Developer", "Backend Developer", "UI Designer", "Frontend Developer"]
+  const bottomRow = ["Digital Developer", "Backend Developer", "Bank and Developer", "Graphic Designer", "Social services"]
+
+  const iconList = [
+    { icon: <FaGoogle />, style: { top: "10%", left: "10%", color: "#4285f4" } },
+    { icon: <FaTwitter />, style: { top: "15%", right: "15%", color: "#1da1f2" } },
+    { icon: <FaLinkedin />, style: { top: "25%", left: "20%", color: "#0077b5" } },
+    { icon: <FaMicrosoft />, style: { top: "30%", right: "25%", color: "#00a1f1" } },
+    { icon: <FaApple />, style: { top: "40%", left: "15%", color: "#000000" } },
+    { icon: <FaAmazon />, style: { top: "45%", right: "20%", color: "#ff9900" } },
+  ]
+
+  const categoryStyle = {
+    padding: "8px 16px",
+    borderRadius: "20px",
+    fontSize: "0.9rem",
+    backdropFilter: "blur(10px)",
+    display: "inline-block",
+    minWidth: "fit-content",
+  }
+
+  const getCategoryColor = () => ({
+    background: theme === "dark" ? "rgba(255,255,255,0.1)" : "rgba(139,92,246,0.1)",
+    color: theme === "dark" ? "#e5e7eb" : "#6A38C2",
+    border: `1px solid ${theme === "dark" ? "rgba(255,255,255,0.2)" : "rgba(139,92,246,0.2)"}`,
+  })
 
   return (
-    <section id="home" className={`py-20 relative overflow-hidden ${isDark ? "bg-gradient-to-br from-purple-900 to-blue-900" : "bg-gradient-to-br from-purple-50 to-blue-50"}`}
+    <section
+      id="home"
+      style={{
+        background: theme === "dark" ? "#222222" : "#f8fafc",
+        padding: "100px 0",
+        color: theme === "dark" ? "#FFFFFF" : "#222222",
+        textAlign: "center",
+        overflow: "hidden",
+        position: "relative",
+      }}
     >
-      {/* Floating Company Logos */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 left-20 w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center text-white font-bold">
-          G
-        </div>
-        <div className="absolute top-32 right-32 w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">
-          in
-        </div>
-        <div className="absolute top-40 left-1/4 w-8 h-8 bg-orange-500 rounded flex items-center justify-center text-white font-bold">
-          a
-        </div>
-        <div className="absolute top-16 right-20 w-10 h-10 bg-red-500 rounded flex items-center justify-center text-white font-bold">
-          M
-        </div>
-        <div className="absolute bottom-32 left-16 w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center text-white font-bold">
-          ■
-        </div>
-        <div className="absolute bottom-40 right-24 w-10 h-10 bg-yellow-500 rounded flex items-center justify-center text-white font-bold">
-          ⊞
-        </div>
-      </div>
+      {iconList.map((item, i) => (
+        <div key={i} style={{ position: "absolute", fontSize: "2rem", ...item.style }}>{item.icon}</div>
+      ))}
 
-      <div className="container mx-auto px-4 text-center relative z-10">
-        <div className="max-w-4xl mx-auto">
-          <h1 className={`text-5xl md:text-6xl font-bold mb-6 ${isDark ? "text-white" : "text-gray-900"}`}>
-            Search, Apply &<br />
-            Get Your{" "}
-            <span className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-              Dream Job
-            </span>
-          </h1>
-          <p className={`text-xl mb-8 max-w-2xl mx-auto ${isDark ? "text-gray-300" : "text-gray-600"}`}>
-            Start your hunt for the best, life-changing career opportunities from here in your selected areas
-            conveniently and get hired quickly.
-          </p>
-
-          {/* Action Buttons */}
-          <div className="flex items-center justify-center space-x-6 mb-16">
-            <button className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 text-lg rounded-lg transition-colors font-semibold">
-              Browse Jobs
-            </button>
-            <button
-              className={`flex items-center space-x-2 px-6 py-4 rounded-lg transition-colors ${isDark ? "text-gray-300 hover:text-purple-400" : "text-gray-700 hover:text-purple-600"}`}
-            >
-              <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center">
-                <Play className="w-5 h-5 text-white ml-1" />
-              </div>
-              <span className="text-lg font-semibold">How It Works?</span>
-            </button>
+      <div className="container">
+        <div style={{ marginBottom: "60px", position: "relative", zIndex: 2 }}>
+          <div style={{ marginBottom: "16px" }}>
+            <span style={{
+              background: "#fef3c7",
+              color: "#92400e",
+              padding: "6px 12px",
+              borderRadius: "20px",
+              fontSize: "0.9rem",
+              fontWeight: "500",
+            }}>🎯 No.1 Job Hunt Website</span>
           </div>
 
-          {/* Job Categories Scrolling */}
-          <div className="relative">
-            <div className="flex space-x-4 overflow-hidden">
-              <div className="flex space-x-4 animate-scroll">
-                {jobCategories.map((category, index) => (
-                  <span
-                    key={index}
-                    className={`px-4 py-2 rounded-full whitespace-nowrap transition-colors hover:bg-purple-100 hover:text-purple-600 cursor-pointer ${isDark ? "bg-gray-700 text-gray-300" : "bg-white text-gray-700 shadow-sm"}`}
-                  >
-                    {category}
-                  </span>
-                ))}
-              </div>
-            </div>
+          <h1 style={{
+            fontSize: "3.5rem",
+            fontWeight: "bold",
+            marginBottom: "24px",
+            lineHeight: "1.2",
+            color: theme === "dark" ? "white" : "#222222"
+          }}>Search, Apply &<br />Get Your <span style={{ color: "#FA4E09" }}>Dream Job</span></h1>
+
+          <p style={{
+            fontSize: "1.1rem",
+            marginBottom: "40px",
+            opacity: 0.8,
+            maxWidth: "600px",
+            margin: "0 auto 40px",
+            color: theme === "dark" ? "#FFFFFF" : "#6b7280",
+          }}>Start your hunt for the best, life-changing career opportunities from here in your selected areas conveniently and get hired quickly.</p>
+
+          <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap", alignItems: "center" }}>
+            <button className="btn btn-primary"
+              style={{ background: "#6A38C2", color: "white", padding: "12px 32px", fontSize: "1.1rem", border: "none", borderRadius: "8px" }}>Browse Jobs
+            </button>
+            <button style={{
+              background: "transparent",
+              color: theme === "dark" ? "#e5e7eb" : "#6b7280",
+              padding: "12px 24px",
+              fontSize: "1.1rem",
+              border: "none",
+              borderRadius: "8px",
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+              cursor: "pointer",
+            }}>
+              <span style={{
+                background: "#6A38C2",
+                color: "white",
+                borderRadius: "50%",
+                width: "32px",
+                height: "32px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}>▶</span>How It Works?</button>
+          </div>
+        </div>
+
+        <div style={{ marginTop: "60px", position: "relative" }}>
+          {/* Top Row */}
+          <div style={{
+            display: "flex",
+            gap: "12px",
+            marginBottom: "16px",
+            animation: "scrollLeft 20s linear infinite",
+            whiteSpace: "nowrap",
+          }}>
+            {[...topRow, ...topRow].map((cat, i) => (
+              <span key={i} style={{ ...categoryStyle, ...getCategoryColor() }}>{cat}</span>
+            ))}
+          </div>
+
+          {/* Bottom Row */}
+          <div style={{
+            display: "flex",
+            gap: "12px",
+            animation: "scrollRight 25s linear infinite",
+            whiteSpace: "nowrap",
+          }}>
+            {[...bottomRow, ...bottomRow].map((cat, i) => (
+              <span key={i} style={{ ...categoryStyle, ...getCategoryColor() }}>{cat}</span>
+            ))}
           </div>
         </div>
       </div>
 
       <style jsx>{`
-        @keyframes scroll {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
+        @keyframes scrollLeft {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
         }
-        .animate-scroll {
-          animation: scroll 30s linear infinite;
-        }
+        @keyframes scrollRight {
+          0% { transform: translateX(-50%); }
+          100% { transform: translateX(0); }
       `}</style>
     </section>
   )
 }
+export default HeroSection
