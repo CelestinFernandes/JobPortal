@@ -1,3 +1,22 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Red Hat Display", Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  min-height: 100vh;
+}
+
+.red-hat-display {
+  font-family: "Red Hat Display", Arial, sans-serif;
+  font-weight: normal;
+}
+
+.outfit {
+  font-family: "Outfit", Arial, sans-serif;
+  font-weight: normal;
+}
