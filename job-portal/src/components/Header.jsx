@@ -1,30 +1,81 @@
 "use client"
-
-import { Sun, Moon } from "lucide-react"
+import { useState, useEffect } from "react"
 import Logo from "./Logo"
+import Navigation from "./Navigation"
 
-export default function Header({ isDark, toggleTheme }) {
+const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "light")
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme)
+    localStorage.setItem("theme", theme)
+  }, [theme])
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth <= 768)
+      if (window.innerWidth > 768) setIsMenuOpen(false)
+    }
+    checkScreenSize()
+    window.addEventListener("resize", checkScreenSize)
+    return () => window.removeEventListener("resize", checkScreenSize)
+  }, [])
+
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light")
+    if (isMobile) setIsMenuOpen(false)
+  }
+
+  const closeMenu = () => setIsMenuOpen(false)
+
   return (
-    <header className={`sticky top-0 z-50 shadow-sm border-b backdrop-blur-sm ${isDark ? "bg-gray-900/95 border-gray-700" : "bg-white/95 border-gray-200"}`}>
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        <Logo isDark={isDark} />
-
-        <nav className="hidden md:flex items-center space-x-8">
-          <a href="#home" className={`transition-colors hover:text-purple-600 ${isDark ? "text-gray-300" : "text-gray-600"}`}>Home</a>
-          <a href="#about" className={`transition-colors hover:text-purple-600 ${isDark ? "text-gray-300" : "text-gray-600"}`}>About</a>
-          <a href="#jobs" className={`transition-colors hover:text-purple-600 ${isDark ? "text-gray-300" : "text-gray-600"}`}>Jobs</a>
-          <a href="#services" className={`transition-colors hover:text-purple-600 ${isDark ? "text-gray-300" : "text-gray-600"}`}>Services</a>
-          <a href="#contact" className={`transition-colors hover:text-purple-600 ${isDark ? "text-gray-300" : "text-gray-600"}`}>Contact</a>
+    <header style={{ background: theme === "dark" ? "#222222" : "white", boxShadow: "0 2px 12px rgba(0, 0, 0, 0.08)", position: "sticky", top: 0, zIndex: 1000 }}>
+      <div className="container">
+        <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "16px 0" }}>
+          <Logo />
+          {!isMobile && (
+            <div style={{ display: "flex", alignItems: "center", gap: "32px" }}>
+              <Navigation theme={theme} isMobile={false} onNavigate={closeMenu} />
+              <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+                <button onClick={toggleTheme} style={{ background: "none", border: `2px solid ${theme === "dark" ? "#FFFFFF" : "#6A38C2"}`, borderRadius: "6px", padding: "8px 12px", cursor: "pointer", fontSize: "16px", color: theme === "dark" ? "#FFFFFF" : "#6A38C2", transition: "all 0.3s ease" }}>
+                  {theme === "light" ? "🌙" : "☀️"}
+                </button>
+                <a href="#login" className="btn btn-outline" style={{ padding: "8px 20px" }}>Login</a>
+                <a href="#signup" className="btn btn-primary" style={{ padding: "8px 20px" }}>Register</a>
+              </div>
+            </div>
+          )}
+          {isMobile && (
+            <button onClick={() => setIsMenuOpen(!isMenuOpen)} style={{ background: "none", border: "none", fontSize: "24px", cursor: "pointer", color: theme === "dark" ? "#FFFFFF" : "#222222", padding: "8px", zIndex: 1001 }}>
+              {isMenuOpen ? "✕" : "☰"}
+            </button>
+          )}
         </nav>
-
-        <div className="flex items-center space-x-4">
-          <button onClick={toggleTheme} className={`p-2 rounded-lg transition-colors hover:bg-purple-100 ${isDark ? "text-gray-300 hover:bg-purple-900" : "text-gray-600"}`}>
-            {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-          </button>
-          <button className={`px-4 py-2 transition-colors hover:text-purple-600 ${isDark ? "text-gray-300" : "text-gray-600"}`}>Login</button>
-          <button className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-colors">Register</button>
-        </div>
+        {isMobile && isMenuOpen && (
+          <>
+            <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(0, 0, 0, 0.5)", zIndex: 999 }} onClick={closeMenu} />
+            <div style={{ position: "absolute", top: "100%", left: 0, right: 0, background: theme === "dark" ? "#222222" : "white", boxShadow: "0 4px 20px rgba(0, 0, 0, 0.15)", borderTop: `1px solid ${theme === "dark" ? "#374151" : "#e5e7eb"}`, zIndex: 1000, maxHeight: "80vh", overflowY: "auto" }}>
+              <div style={{ padding: "20px", display: "flex", flexDirection: "column", gap: "16px" }}>
+                <div style={{ marginBottom: "16px" }}>
+                  <Navigation theme={theme} isMobile={true} onNavigate={closeMenu} />
+                </div>
+                <div style={{ height: "1px", background: theme === "dark" ? "#374151" : "#e5e7eb", margin: "8px 0" }} />
+                <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+                  <button onClick={toggleTheme} style={{ background: "none", border: `2px solid ${theme === "dark" ? "#FFFFFF" : "#6A38C2"}`, borderRadius: "6px", padding: "12px 16px", cursor: "pointer", fontSize: "16px", color: theme === "dark" ? "#FFFFFF" : "#6A38C2", transition: "all 0.3s ease", width: "100%", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>
+                    {theme === "light" ? "🌙" : "☀️"} {theme === "light" ? "Dark Mode" : "Light Mode"}
+                  </button>
+                  <a href="#login" className="btn btn-outline" onClick={closeMenu} style={{ padding: "12px 16px", width: "100%", textAlign: "center", textDecoration: "none", display: "block" }}>Login</a>
+                  <a href="#signup" className="btn btn-primary" onClick={closeMenu} style={{ padding: "12px 16px", width: "100%", textAlign: "center", textDecoration: "none", display: "block" }}>Register</a>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </header>
   )
 }
+
+export default Header
