@@ -5,18 +5,15 @@ const servicesData = {
   title: "What We Offer",
   description: "Job Portal is the right platform for you to get various job recommendations, get career counseling, and find your ideal job profile.",
   services: [
-    {
-      image: "/placeholder.svg?height=200&width=400",
+    { image: "/placeholder.svg?height=200&width=400",
       title: "Job Recommendation",
       description: "Set your job preferences and get notified of the best fit job recommendations.",
     },
-    {
-      image: "/placeholder.svg?height=200&width=400",
+    { image: "/placeholder.svg?height=200&width=400",
       title: "Create & Build Profile",
       description: "Build a compelling professional profile that showcases your skills and attracts employers.",
     },
-    {
-      image: "/placeholder.svg?height=200&width=400",
+    { image: "/placeholder.svg?height=200&width=400",
       title: "Career Consultation",
       description: "Get expert career advice and guidance to help you make informed career decisions.",
     },
@@ -36,19 +33,16 @@ const Services = () => {
     return () => {
       window.removeEventListener("storage", handleStorageChange)
       clearInterval(interval)
-    }
-  }, [theme])
+    }}, [theme])
 
   return (
     <section id="services" className="section" style={{ background: theme === "dark" ? "#222222" : "white" }}>
       <div className="container">
         <div style={{ marginBottom: "60px" }}>
           <h2 style={{ fontSize: "40px", fontWeight: "bold", color: theme === "dark" ? "#FFFFFF" : "#222222", marginBottom: "16px", textAlign: "left" }}>
-            {servicesData.title}
-          </h2>
+            {servicesData.title}</h2>
           <p style={{ color: theme === "dark" ? "#FFFFFF" : "#6b7280", fontSize: "18px", textAlign: "left", maxWidth: "600px" }}>
-            {servicesData.description}
-          </p>
+            {servicesData.description}</p>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "40px" }}>
           {servicesData.services.map((service, index) => (
@@ -65,11 +59,9 @@ const Services = () => {
                 </div>
                 <div>
                   <h3 style={{ fontSize: "21px", fontWeight: "bold", color: theme === "dark" ? "#FFFFFF" : "#222222", marginBottom: "8px" }}>
-                    {service.title}
-                  </h3>
+                    {service.title}</h3>
                   <p style={{ color: theme === "dark" ? "#FFFFFF" : "#6b7280", lineHeight: "1.6", fontSize: "15px" }}>
-                    {service.description}
-                  </p>
+                    {service.description}</p>
                 </div>
               </div>
             </div>
