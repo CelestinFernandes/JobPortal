@@ -1,33 +1,76 @@
-import { CheckCircle } from "lucide-react"
+"use client"
+import { useState, useEffect } from "react"
 
-export default function Services({ isDark }) {
-  const services = [
-    {title: "Job Recommendation",
-      description: "Get personalized job recommendations based on your skills and preferences."},
-    {title: "Create & Build Profile",
-      description: "Build a professional profile that showcases your skills and experience."},
-    {title: "Career Consultation",
-      description: "Get expert advice on your career path and professional development."}]
+const servicesData = {
+  title: "What We Offer",
+  description: "Job Portal is the right platform for you to get various job recommendations, get career counseling, and find your ideal job profile.",
+  services: [
+    {
+      image: "/placeholder.svg?height=200&width=400",
+      title: "Job Recommendation",
+      description: "Set your job preferences and get notified of the best fit job recommendations.",
+    },
+    {
+      image: "/placeholder.svg?height=200&width=400",
+      title: "Create & Build Profile",
+      description: "Build a compelling professional profile that showcases your skills and attracts employers.",
+    },
+    {
+      image: "/placeholder.svg?height=200&width=400",
+      title: "Career Consultation",
+      description: "Get expert career advice and guidance to help you make informed career decisions.",
+    },
+  ],
+}
+
+const Services = () => {
+  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "light")
+
+  useEffect(() => {
+    const handleStorageChange = () => setTheme(localStorage.getItem("theme") || "light")
+    window.addEventListener("storage", handleStorageChange)
+    const interval = setInterval(() => {
+      const currentTheme = localStorage.getItem("theme") || "light"
+      if (currentTheme !== theme) setTheme(currentTheme)
+    }, 100)
+    return () => {
+      window.removeEventListener("storage", handleStorageChange)
+      clearInterval(interval)
+    }
+  }, [theme])
 
   return (
-    <section id="services" className={`py-20 ${isDark ? "bg-gray-900" : "bg-white"}`}>
-      <div className="container mx-auto px-4 text-center">
-        <h2 className={`text-4xl font-bold mb-4 ${isDark ? "text-white" : "text-gray-900"}`}>What We Offer</h2>
-        <p className={`text-xl mb-16 max-w-2xl mx-auto ${isDark ? "text-gray-300" : "text-gray-600"}`}>
-          We're here to help you find the right job for your career and communicate with your employer.</p>
-
-        <div className="grid md:grid-cols-3 gap-8">
-          {services.map((service, index) => (
-            <div key={index} className={`text-left rounded-lg transition-all hover:shadow-lg hover:scale-105 hover:bg-purple-50 ${isDark ? "bg-gray-800 hover:bg-purple-900" : "bg-white shadow-sm"}`}>
-              <div className={`w-full h-48 rounded-t-lg mb-4 ${isDark ? "bg-gray-700" : "bg-gray-200"}`}></div>
-              <div className="p-6">
-                <div className="flex items-center mb-4">
-                  <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
-                    <CheckCircle className="w-5 h-5 text-purple-600" />
+    <section id="services" className="section" style={{ background: theme === "dark" ? "#222222" : "white" }}>
+      <div className="container">
+        <div style={{ marginBottom: "60px" }}>
+          <h2 style={{ fontSize: "40px", fontWeight: "bold", color: theme === "dark" ? "#FFFFFF" : "#222222", marginBottom: "16px", textAlign: "left" }}>
+            {servicesData.title}
+          </h2>
+          <p style={{ color: theme === "dark" ? "#FFFFFF" : "#6b7280", fontSize: "18px", textAlign: "left", maxWidth: "600px" }}>
+            {servicesData.description}
+          </p>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "40px" }}>
+          {servicesData.services.map((service, index) => (
+            <div key={index} style={{ textAlign: "left" }}>
+              <div style={{ width: "100%", height: "200px", borderRadius: "12px", overflow: "hidden", marginBottom: "20px", background: "#f3f4f6" }}>
+                <img src={service.image || "/placeholder.svg"} alt={service.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              </div>
+              <div style={{ display: "flex", alignItems: "flex-start", gap: "16px" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                  <div style={{ width: "60px", height: "60px", background: "transparent", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "24px", fontWeight: "bold", color: theme === "dark" ? "#FFFFFF" : "#222222" }}>
+                    {String(index + 1).padStart(2, "0")}
                   </div>
-                  <h3 className={`text-xl font-bold ${isDark ? "text-white" : "text-gray-900"}`}>{service.title}</h3>
+                  <div style={{ width: "8px", height: "40px", background: "#6A38C2", borderRadius: "2px" }} />
                 </div>
-                <p className={`${isDark ? "text-gray-300" : "text-gray-600"}`}>{service.description}</p>
+                <div>
+                  <h3 style={{ fontSize: "21px", fontWeight: "bold", color: theme === "dark" ? "#FFFFFF" : "#222222", marginBottom: "8px" }}>
+                    {service.title}
+                  </h3>
+                  <p style={{ color: theme === "dark" ? "#FFFFFF" : "#6b7280", lineHeight: "1.6", fontSize: "15px" }}>
+                    {service.description}
+                  </p>
+                </div>
               </div>
             </div>
           ))}
@@ -36,3 +79,5 @@ export default function Services({ isDark }) {
     </section>
   )
 }
+
+export default Services
