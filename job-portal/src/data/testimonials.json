@@ -1,0 +1,40 @@
+{ "title": "Testimonials",
+  "description": "Now, let's know what our career aspirants have to say about our evolving community and career finding services.",
+  "testimonials": [
+    { "id": 1,
+      "name": "Peter Parkinson",
+      "title": "Full Stack Developer",
+      "avatar": "/placeholder.svg?height=60&width=60",
+      "rating": 5,
+      "text": "I was just a graduate of computer science from out of a well-known university and even didn't have any internship experience in full-stack development. However, my knowledge in the domain, encouraged to learn new things, and the help from the Job Portal for quick job finding gave me a chance to boost my career as a full-stack developer in the rapidly evolving IT industry."
+    },
+    { "id": 2,
+      "name": "Sarah Johnson",
+      "title": "UX Designer",
+      "avatar": "/placeholder.svg?height=60&width=60",
+      "rating": 5,
+      "text": "JobHunt transformed my career search completely. As a UX designer looking for remote opportunities, I found the perfect match within weeks. The platform's intuitive interface and personalized job recommendations made all the difference in landing my dream job."
+    },
+    { "id": 3,
+      "name": "Michael Chen",
+      "title": "Data Scientist",
+      "avatar": "/placeholder.svg?height=60&width=60",
+      "rating": 4,
+      "text": "The career consultation service provided by JobHunt was exceptional. They helped me transition from academia to industry seamlessly. The personalized guidance and job matching algorithm connected me with top tech companies."
+    },
+    { "id": 4,
+      "name": "Emily Rodriguez",
+      "title": "Product Manager",
+      "avatar": "/placeholder.svg?height=60&width=60",
+      "rating": 5,
+      "text": "I've used many job portals, but JobHunt stands out with its comprehensive approach. From profile building to interview preparation, they supported me throughout my job search journey. Highly recommended!"
+    },
+    { "id": 5,
+      "name": "David Thompson",
+      "title": "Software Engineer",
+      "avatar": "/placeholder.svg?height=60&width=60",
+      "rating": 5,
+      "text": "JobHunt's AI-powered job recommendations were spot-on. They understood my skills and preferences perfectly, connecting me with opportunities I wouldn't have found elsewhere. The platform truly accelerated my career growth."
+    }
+  ]
+}

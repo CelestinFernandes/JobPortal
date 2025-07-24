@@ -1,0 +1,52 @@
+{
+  "companies": [
+    { "id": 1,
+      "name": "Netflix",
+      "logo": "/placeholder.svg?height=60&width=60",
+      "industry": "Entertainment",
+      "location": "Los Gatos, CA",
+      "employees": "10,000+",
+      "description": "The world's leading streaming entertainment service"
+    },
+    { "id": 2,
+      "name": "Google",
+      "logo": "/placeholder.svg?height=60&width=60",
+      "industry": "Technology",
+      "location": "Mountain View, CA",
+      "employees": "100,000+",
+      "description": "Organizing the world's information and making it universally accessible"
+    },
+    { "id": 3,
+      "name": "Microsoft",
+      "logo": "/placeholder.svg?height=60&width=60",
+      "industry": "Technology",
+      "location": "Redmond, WA",
+      "employees": "200,000+",
+      "description": "Empowering every person and organization on the planet to achieve more"
+    },
+    { "id": 4,
+      "name": "Amazon",
+      "logo": "/placeholder.svg?height=60&width=60",
+      "industry": "E-commerce",
+      "location": "Seattle, WA",
+      "employees": "1,500,000+",
+      "description": "Earth's most customer-centric company"
+    },
+    { "id": 5,
+      "name": "Tesla",
+      "logo": "/placeholder.svg?height=60&width=60",
+      "industry": "Automotive",
+      "location": "Austin, TX",
+      "employees": "100,000+",
+      "description": "Accelerating the world's transition to sustainable energy"
+    },
+    { "id": 6,
+      "name": "Meta",
+      "logo": "/placeholder.svg?height=60&width=60",
+      "industry": "Social Media",
+      "location": "Menlo Park, CA",
+      "employees": "80,000+",
+      "description": "Connecting the world through social technology"
+    }
+  ]
+}
